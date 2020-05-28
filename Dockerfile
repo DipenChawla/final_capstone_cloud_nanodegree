@@ -4,6 +4,7 @@ COPY ./requirements.txt requirements.txt
 RUN pip install --upgrade pip &&\
     pip install --trusted-host pypi.python.org -r requirements.txt
 
+
 COPY ./app /app
 
 WORKDIR /app
