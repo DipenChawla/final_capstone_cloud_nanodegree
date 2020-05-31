@@ -1,15 +1,18 @@
-import numpy as np
-from flask import Flask, request, jsonify, render_template
 import pickle
+import numpy as np
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    '''
+    default response
+    '''
+    return "Welcome to the Udacity Cloud Nanodegree Capstone"
 
-@app.route('/predict',methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     '''
     For rendering results on HTML GUI
@@ -20,9 +23,12 @@ def predict():
 
     output = round(prediction[0], 2)
 
-    return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
+    return render_template(
+        'index.html', 
+        prediction_text='Employee Salary should be $ {}'.format(output)
+    )
 
-@app.route('/predict_api',methods=['POST'])
+@app.route('/predict_api', methods=['POST'])
 def predict_api():
     '''
     For direct API calls trought request
@@ -34,4 +40,4 @@ def predict_api():
     return jsonify(output)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
