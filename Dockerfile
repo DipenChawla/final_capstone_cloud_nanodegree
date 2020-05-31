@@ -15,4 +15,4 @@ ARG APP_PORT=5000
 
 EXPOSE $APP_PORT
 
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
