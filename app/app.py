@@ -1,6 +1,7 @@
+''' flask app for prediction'''
 import pickle
 import numpy as np
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
@@ -24,7 +25,7 @@ def predict():
     output = round(prediction[0], 2)
 
     return render_template(
-        'index.html', 
+        'index.html',
         prediction_text='Employee Salary should be $ {}'.format(output)
     )
 
