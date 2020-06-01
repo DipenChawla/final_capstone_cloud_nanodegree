@@ -44,3 +44,11 @@ kops validate cluster
 5. Create deployments and services for the application, connect the service to a load balancer.
 
 6. Access the api or web app via the loadbalancer url
+
+<h3> Files in repo </h3>
+
+* app-deployment.yaml : kubernetes deployments configuration
+* app-service.yaml : kubernetes service and lb configuration
+* .hadolint.yaml : ignore specific errors for linting
+* upload_docker.sh : bash script for pushing to docker repo
+* post_request.sh : bash script for making a request to the deployed app
