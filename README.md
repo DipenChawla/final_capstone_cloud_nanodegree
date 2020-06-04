@@ -52,3 +52,27 @@ kops validate cluster
 * .hadolint.yaml : ignore specific errors for linting
 * upload_docker.sh : bash script for pushing to docker repo
 * post_request.sh : bash script for making a request to the deployed app
+
+
+<h3> Creating a minimal configuration cluster with kops and aws </h3>
+
+CLUSTER WAS CREATED BY HAND WITH [kops](https://github.com/kubernetes/kops/tree/master/docs) as shown below
+
+REQUISITES - aws access and secret keys, awscli, kops and kubectl.
+
+* Create a s3 bucket, set env
+```
+export KOPS_STATE_STORE=s3://<your-bucket>`
+```
+
+* Create a gossip based Kubernetes cluster (name ends with .local), assign a keygen and create cluster as required
+```
+kops create secret --name white-polaris.k8s.local sshpublickey admin -i ~/.ssh/id_rsa.pub
+kops create cluster white-polaris.k8s.local --master-size=t2.micro --node-size=t2.micro --node-count=1 --zones=eu-west-1a --master-zones=eu-west-1a
+```
+
+* Validate cluster
+
+```
+kops validate cluster
+```
